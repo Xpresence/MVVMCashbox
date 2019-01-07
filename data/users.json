@@ -1,0 +1,1 @@
+[{"isAdmin":false,"name":"User","password":"user"},{"isAdmin":false,"name":"Manager","password":"manager"},{"isAdmin":true,"name":"Admin","password":"admin"}]

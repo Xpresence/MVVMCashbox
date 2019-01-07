@@ -1,0 +1,80 @@
+﻿<Window x:Class="MVVMCashbox.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMCashbox"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="430" Width="600" MinHeight="380" MinWidth="550"
+        WindowStartupLocation="CenterScreen">
+
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="listBox" Grid.Column="0" ItemsSource="{Binding Products}"
+                 SelectedItem="{Binding SelectedProduct}" Grid.Row="1" HorizontalAlignment="Stretch" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Count , StringFormat={}{0} штук}" />
+                        <TextBlock Text="{Binding Path=Cost, StringFormat={}{0} руб.}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox x:Name="scoreBox" Grid.Column="2" ItemsSource="{Binding ScoreProducts}"
+                 SelectedItem="{Binding ScoreSelectedProduct}" Grid.Row="1" HorizontalAlignment="Stretch" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Count, StringFormat={}{0} штук}" />
+                        <TextBlock Text="{Binding Path=Cost, StringFormat={}{0} руб.}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding CancelCommand}" Width="150" Margin="5">Отменить заказ</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="50" Command="{Binding MoveToChekCommand}" CommandParameter="{Binding SelectedProduct}" Margin="5,15,5,15">→</Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="50" Command="{Binding RemoveToChekCommand}" CommandParameter="{Binding ScoreSelectedProduct}" Margin="5,15,5,15">←</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding ScoreCommand}" Width="150" Margin="5" Content="Оформить чек"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch">
+            <TextBlock Text="{Binding StringFormat=Итоговая стоимость {0} рублей, Path=ResultCost}"  Margin="5"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
