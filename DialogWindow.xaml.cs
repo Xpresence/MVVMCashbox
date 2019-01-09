@@ -17,9 +17,9 @@ namespace MVVMCashbox
     /// <summary>
     /// Логика взаимодействия для PasswordWindow.xaml
     /// </summary>
-    public partial class PasswordWindow : Window
+    public partial class DialogWindow : Window
     {
-        public PasswordWindow()
+        public DialogWindow()
         {
             InitializeComponent();
         }
@@ -29,9 +29,9 @@ namespace MVVMCashbox
             this.DialogResult = true;
         }
 
-        public string Password
+        public string Text
         {
-            get { return passwordBox.Text; }
+            get { return dialogBox.Text; }
         }
     }
 }

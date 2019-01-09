@@ -86,7 +86,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PasswordWindow.xaml">
+    <Page Include="DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GraphicsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,6 +110,9 @@
     <Compile Include="AdminEditUsersWindow.xaml.cs">
       <DependentUpon>AdminEditUsersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GraphicsWindow.xaml.cs">
+      <DependentUpon>GraphicsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Score.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserViewModel.cs" />
@@ -116,8 +123,8 @@
     <Compile Include="Command.cs" />
     <Compile Include="IJsonFileInterface.cs" />
     <Compile Include="JsonFileService.cs" />
-    <Compile Include="PasswordWindow.xaml.cs">
-      <DependentUpon>PasswordWindow.xaml</DependentUpon>
+    <Compile Include="DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="StartupWindow.xaml.cs">

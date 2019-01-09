@@ -51,6 +51,36 @@ namespace MVVMCashbox
         }
 
 
+        // Добавление определенного количества выбранного товара в корзину
+        /*
+        private void Button_AddProducts(object sender, RoutedEventArgs e)
+        {
+            DialogWindow dialogWindow = new DialogWindow();
+            dialogWindow.blockDialogBox.Text = "Введите количество добавляемого товара:";
+
+            if (dialogWindow.ShowDialog() == true)
+            {
+                int data;
+                bool isInt = int.TryParse(dialogWindow.Text, out data);
+
+                if (isInt)
+                {
+                    var button = sender as Button;
+                    for (int i = 0; i < data - 1; i++)
+                    {
+                        button.Command.Execute(button.CommandParameter);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Неверное значение!");
+                }
+            }
+            
+
+        }
+        */
+
 
     }
 }

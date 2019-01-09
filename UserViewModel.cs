@@ -134,14 +134,11 @@ namespace MVVMCashbox
 
                     foreach (var rightProduct in ScoreProducts)
                     {
-                        var leftProduct = Products.Where(nameCheck => nameCheck.Name.Contains(rightProduct.Name));
+                        var leftProduct = Products.Where(nameCheck => nameCheck.Name.Contains(rightProduct.Name)).FirstOrDefault();
 
-                        if (!IsNullOrEmpty(leftProduct))
+                        if (leftProduct != null)
                         {
-                            foreach (var pr in leftProduct)
-                            {
-                                pr.Count += rightProduct.Count;
-                            }
+                            leftProduct.Count += rightProduct.Count;
                         }
                     }
 
@@ -164,25 +161,23 @@ namespace MVVMCashbox
                         
                         if (objProduct != null)
                         {
-                            Product newProduct = new Product()
-                            {
-                                Name = objProduct.Name,
-                                Count = 1,
-                                Cost = objProduct.Cost
-                            };
 
-                            var movedProduct = ScoreProducts.Where(nameCheck => nameCheck.Name.Contains(newProduct.Name));
+                            var movedProduct = ScoreProducts.Where(nameCheck => nameCheck.Name.Contains(objProduct.Name)).FirstOrDefault();
 
-                            if (!IsNullOrEmpty(movedProduct))
+                            if (movedProduct != null)
                             {
-                                foreach (var pr in movedProduct)
-                                {
-                                    pr.Count += 1;
-                                    objProduct.Count -= 1;
-                                }
+                                movedProduct.Count += 1;
+                                objProduct.Count -= 1;
                             }
                             else
                             {
+                                Product newProduct = new Product()
+                                {
+                                    Name = objProduct.Name,
+                                    Count = 1,
+                                    Cost = objProduct.Cost
+                                };
+
                                 ScoreProducts.Add(newProduct);
                                 objProduct.Count -= 1;
                             }
@@ -221,14 +216,11 @@ namespace MVVMCashbox
                     {
                         objProduct.Count -= 1;
 
-                        var findedProduct = Products.Where(nameCheck => nameCheck.Name.Contains(objProduct.Name));
+                        var findedProduct = Products.Where(nameCheck => nameCheck.Name.Contains(objProduct.Name)).FirstOrDefault();
 
-                        if (!IsNullOrEmpty(findedProduct))
+                        if (findedProduct != null)
                         {
-                            foreach (var pr in findedProduct)
-                            {
-                                pr.Count += 1;
-                            }
+                            findedProduct.Count += 1;
                         }
 
                         if (objProduct.Count == 0)
@@ -243,12 +235,6 @@ namespace MVVMCashbox
             }
         }
 
-        
-
-        private static bool IsNullOrEmpty(IEnumerable<Product> items)
-        {
-            return items == null || !items.Any();
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)

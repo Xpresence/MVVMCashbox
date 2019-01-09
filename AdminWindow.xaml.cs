@@ -59,18 +59,19 @@ namespace MVVMCashbox
         // Поступление выбранного товара
         private void Button_Update(object sender, RoutedEventArgs e)
         {
-            PasswordWindow passwordWindow = new PasswordWindow();
-            passwordWindow.Title = "Ввод поступления";
-            passwordWindow.blockPasswordBox.Text = "Введите количество добавляемого товара:";
+            DialogWindow dialogWindow = new DialogWindow();
+            dialogWindow.blockDialogBox.Text = "Введите количество добавляемого товара:";
 
-            if (passwordWindow.ShowDialog() == true)
+            if (dialogWindow.ShowDialog() == true)
             {
                 int data;
-                bool isInt = int.TryParse(passwordWindow.Password, out data);
+                bool isInt = int.TryParse(dialogWindow.Text, out data);
 
                 if (isInt)
                 {
-                    foreach (var product in model.Products.Where(p => p == model.SelectedProduct))
+                    var product = model.Products.Where(p => p == model.SelectedProduct).FirstOrDefault();
+
+                    if(product != null)
                     {
                         product.Count += data;
                     }
@@ -91,6 +92,10 @@ namespace MVVMCashbox
             adminEditUsersWindow.Show();
         }
 
-
+        private void Button_Graphics(object sender, RoutedEventArgs e)
+        {
+            GraphicsWindow graphicsWindow = new GraphicsWindow();
+            graphicsWindow.Show();
+        }
     }
 }

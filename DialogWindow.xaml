@@ -1,11 +1,11 @@
-﻿<Window x:Class="MVVMCashbox.PasswordWindow"
+﻿<Window x:Class="MVVMCashbox.DialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMCashbox"
         mc:Ignorable="d"
-        Title="Ввод пароля" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Ввод" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -13,9 +13,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Name="blockPasswordBox">Введите пароль:</TextBlock>
-        <StackPanel FocusManager.FocusedElement="{Binding ElementName=passwordBox}"  Grid.Row="1" MinWidth="250">
-            <TextBox Name="passwordBox"></TextBox>
+        <TextBlock Name="blockDialogBox">Введите:</TextBlock>
+        <StackPanel FocusManager.FocusedElement="{Binding ElementName=dialogBox}"  Grid.Row="1" MinWidth="250">
+            <TextBox Name="dialogBox"></TextBox>
         </StackPanel>
         
 

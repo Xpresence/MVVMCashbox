@@ -64,44 +64,41 @@ namespace MVVMCashbox
             var button = (Button)sender;
             if (button != null)
             {
-                PasswordWindow passwordWindow = new PasswordWindow();
+                DialogWindow passwordWindow = new DialogWindow();
+                passwordWindow.blockDialogBox.Text = "Введите пароль:";
 
                 if (passwordWindow.ShowDialog() == true)
                 {
-                    var findedUser = Users.Where(nameCheck => nameCheck.Name.Contains(button.Content.ToString()));
+                    var findedUser = Users.Where(nameCheck => nameCheck.Name.Contains(button.Content.ToString())).FirstOrDefault();
 
-                    if (!IsNullOrEmpty(findedUser))
+                    if (findedUser != null)
                     {
-                        foreach (var user in findedUser)
+                        if (findedUser.IsAdmin)
                         {
-
-                            if (user.IsAdmin)
+                            if (passwordWindow.Text == findedUser.Password)
                             {
-                                if (passwordWindow.Password == user.Password)
-                                {
-                                    AdminWindow adminWindow = new AdminWindow();
-                                    adminWindow.Title = "Администратор";
-                                    adminWindow.Show();
-                                    this.Close();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Неверный пароль!");
-                                }
+                                AdminWindow adminWindow = new AdminWindow();
+                                adminWindow.Title = "Администратор";
+                                adminWindow.Show();
+                                this.Close();
                             }
                             else
                             {
-                                if (passwordWindow.Password == user.Password)
-                                {
-                                    UserWindow userWindow = new UserWindow();
-                                    userWindow.Title = user.Name;
-                                    userWindow.Show();
-                                    this.Close();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Неверный пароль!");
-                                }
+                                MessageBox.Show("Неверный пароль!");
+                            }
+                        }
+                        else
+                        {
+                            if (passwordWindow.Text == findedUser.Password)
+                            {
+                                UserWindow userWindow = new UserWindow();
+                                userWindow.Title = findedUser.Name;
+                                userWindow.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неверный пароль!");
                             }
                         }
                     }
@@ -113,9 +110,5 @@ namespace MVVMCashbox
             }
         }
 
-        private static bool IsNullOrEmpty(IEnumerable<User> items)
-        {
-            return items == null || !items.Any();
-        }
     }
 }

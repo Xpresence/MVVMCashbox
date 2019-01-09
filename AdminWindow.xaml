@@ -64,11 +64,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding AddCommand}" Width="100" Margin="5">Добавить</Button>
-            <Button Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedProduct}" Width="100" Margin="5">Удалить</Button>
+            <Button Command="{Binding AddCommand}" Width="100" Margin="5">Добавить товар</Button>
+            <Button Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedProduct}" Width="100" Margin="5">Удалить товар</Button>
         </StackPanel>
 
-        <Button Width="150" Margin="5" Click="Button_Update" Grid.Column="1" Grid.Row="2">Обновить количество</Button>
+        <Button Width="200" Margin="5" Click="Button_Update" Grid.Column="1" Grid.Row="2">Добавление N единиц товара</Button>
         <Button Width="200" Margin="5" Grid.Column="0" Grid.Row="0" Click="Button_EditUsers">Редактировать пользователей</Button>
+        <Button Width="200" Margin="5" Grid.Column="1" Grid.Row="0" Click="Button_Graphics">Графики по продажам</Button>
     </Grid>
 </Window>

@@ -61,19 +61,18 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Width="50" Command="{Binding MoveToChekCommand}" CommandParameter="{Binding SelectedProduct}" Margin="5,15,5,15">→</Button>
+            <Button Width="50" Command="{Binding MoveToChekCommand}" CommandParameter="{Binding SelectedProduct}" Margin="5,15,5,15" >→</Button>
         </StackPanel>
         
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Width="50" Command="{Binding RemoveToChekCommand}" CommandParameter="{Binding ScoreSelectedProduct}" Margin="5,15,5,15">←</Button>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding StringFormat=Итоговая стоимость {0} рублей, Path=ResultCost}"  Margin="5"/>
+            </StackPanel>
             <Button Command="{Binding ScoreCommand}" Width="150" Margin="5" Content="Оформить чек"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch">
-            <TextBlock Text="{Binding StringFormat=Итоговая стоимость {0} рублей, Path=ResultCost}"  Margin="5"/>
         </StackPanel>
 
     </Grid>
