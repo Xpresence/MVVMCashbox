@@ -19,9 +19,13 @@ namespace MVVMCashbox
     /// </summary>
     public partial class GraphicsWindow : Window
     {
+        
         public GraphicsWindow()
         {
             InitializeComponent();
+
+            DataViewModel model = new DataViewModel();
+            DataContext = model;
         }
     }
 }

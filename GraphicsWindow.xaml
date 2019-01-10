@@ -4,9 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMCashbox"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
-        Title="GraphicsWindow" Height="300" Width="300">
+        Title="GraphicsWindow" Height="600" Width="1000">
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <chartingToolkit:Chart Title="Заполненность склада" 
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch">
+            <chartingToolkit:ColumnSeries DependentValuePath="Value"
+                                          Title="Продукты"
+                                          IsSelectionEnabled="True"
+                                          IndependentValuePath="Key"
+                                          ItemsSource="{Binding ProductsCount}" />
+        </chartingToolkit:Chart>
+
+        <chartingToolkit:Chart Title="Состав продаж"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch">
+            <chartingToolkit:PieSeries DependentValuePath="Value"
+                                           IndependentValuePath="Key"
+                                           ItemsSource="{Binding SellsProducts}"
+                                           IsSelectionEnabled="True"/>
+        </chartingToolkit:Chart>
+
+        <chartingToolkit:Chart Title="Дневная выручка"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch">
+            <chartingToolkit:AreaSeries DependentValuePath="Value"
+                                            IndependentValuePath="Key"
+                                            Title="Выручка"
+                                            ItemsSource="{Binding Sells}" />
+        </chartingToolkit:Chart>
+
     </Grid>
 </Window>

@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <ListBox x:Name="listBox" Grid.Column="0" ItemsSource="{Binding Products}"
-                 SelectedItem="{Binding SelectedProduct}" Grid.Row="1" HorizontalAlignment="Stretch" Grid.RowSpan="2">
+                 SelectedItem="{Binding SelectedProduct}" Grid.Row="1" HorizontalAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
