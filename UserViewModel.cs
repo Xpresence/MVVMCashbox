@@ -149,57 +149,72 @@ namespace MVVMCashbox
                 });
             }
         }
-        
-        // Переместить из левого списка(склада) в правый(чек) одну единицу товара
+
+        // Переместить из левого списка(склада) в правый(чек) определенное количество товара
         public Command MoveToChekCommand
         {
             get
             {
-                return moveToCheckCommand != null ? moveToCheckCommand : moveToCheckCommand = new Command( (obj) =>
+                return moveToCheckCommand != null ? moveToCheckCommand : moveToCheckCommand = new Command((obj) =>
+                {
+                    Product objProduct = obj as Product;
+
+                    if (objProduct != null)
                     {
-                        Product objProduct = obj as Product;
-                        
-                        if (objProduct != null)
+                        DialogWindow dialogWindow = new DialogWindow();
+                        dialogWindow.blockDialogBox.Text = "Введите количество добавляемого товара:";
+
+                        if (dialogWindow.ShowDialog() == true)
                         {
+                            int data;
+                            bool isInt = int.TryParse(dialogWindow.Text, out data);
 
-                            var movedProduct = ScoreProducts.Where(nameCheck => nameCheck.Name.Contains(objProduct.Name)).FirstOrDefault();
+                            if (isInt)
+                            {
+                                if (data <= 0) return;
 
-                            if (movedProduct != null)
-                            {
-                                movedProduct.Count += 1;
-                                objProduct.Count -= 1;
-                            }
-                            else
-                            {
-                                Product newProduct = new Product()
+                                data = (objProduct.Count - data) < 0 ? objProduct.Count : data;
+                                var movedProduct = ScoreProducts.Where(nameCheck => nameCheck.Name.Contains(objProduct.Name)).FirstOrDefault();
+
+                                if (movedProduct != null)
                                 {
-                                    Name = objProduct.Name,
-                                    Count = 1,
-                                    Cost = objProduct.Cost
-                                };
+                                    movedProduct.Count += data;
+                                    objProduct.Count -= data;
+                                }
+                                else
+                                {
+                                    Product newProduct = new Product()
+                                    {
+                                        Name = objProduct.Name,
+                                        Count = data,
+                                        Cost = objProduct.Cost
+                                    };
 
-                                ScoreProducts.Add(newProduct);
-                                objProduct.Count -= 1;
+                                    ScoreProducts.Add(newProduct);
+                                    objProduct.Count -= data;
+                                }
                             }
 
-                            ResultCostFunction();
                         }
-                    }, (obj) =>
+
+                        ResultCostFunction();
+                    }
+                }, (obj) =>
+                {
+                    var objProduct = obj as Product;
+                    if (objProduct != null)
                     {
-                        Product objProduct = obj as Product;
-                        if (objProduct != null)
+                        if (objProduct.Count > 0)
                         {
-                            if (objProduct.Count > 0)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
+                            return true;
                         }
-                        else return false;
-                    });
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else return false;
+                });
             }
         }
 
